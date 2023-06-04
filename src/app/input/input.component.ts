@@ -7,10 +7,16 @@ import { Component } from '@angular/core';
 })
 export class InputComponent {
   public tasks:string[] = [];
+  public error:string = '';
 
-  addTask (x:any) {
-    if (x.value.trim() != '') {
+  addTask (x:any,err:any) {
+    if (x.value.trim() != '' && x.value.length < 35) {
       this.tasks.push(x.value.trim());
+    }else {
+      err.innerText = 'This is an empty task or a too long one(35 characters max)';
+      setInterval (() => {
+        err.innerText = '';
+      },3000);
     }
     x.value = '';
   }
